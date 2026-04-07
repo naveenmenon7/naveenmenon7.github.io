@@ -793,6 +793,12 @@
       align-items: center;
       justify-content: center;
     }
+    .project-image {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      display: block;
+    }
     /* Animated placeholder for project thumbnails */
     .project-thumb .thumb-pattern {
       position: absolute;
@@ -1471,7 +1477,6 @@
         <button class="filter-tab active" data-filter="all">All</button>
         <button class="filter-tab" data-filter="games">Games</button>
         <button class="filter-tab" data-filter="ar">AR</button>
-        <button class="filter-tab" data-filter="cpp">C++</button>
         <button class="filter-tab" data-filter="tools">Tools</button>
       </div>
     </div>
@@ -1482,18 +1487,8 @@
       <article class="project-card" data-category="games" aria-label="Project: Retroid Space">
         <div class="project-thumb">
           <!-- Animated SVG placeholder — swap with real screenshot <img> -->
-          <svg class="thumb-pattern" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <pattern id="g1" width="30" height="30" patternUnits="userSpaceOnUse">
-                <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#00ff88" stroke-width="0.4"/>
-              </pattern>
-            </defs>
-            <rect width="400" height="225" fill="url(#g1)"/>
-            <circle cx="200" cy="112" r="60" fill="none" stroke="#00ff88" stroke-width="0.8" stroke-dasharray="5 3"/>
-            <circle cx="200" cy="112" r="30" fill="none" stroke="#00cfff" stroke-width="0.6"/>
-          </svg>
-          <span class="thumb-label">Retroid Space</span>
-          <span class="engine-badge">Unity 2D</span>
+          <img src="images/Retroid Space.png" alt="Retroid Space Thumbnail" class="project-image">
+          <span class="engine-badge">C++ / Unity 2D</span>
         </div>
         <div class="project-body">
           <div class="project-meta">
@@ -1524,17 +1519,7 @@
       <!-- PROJECT 2 -->
       <article class="project-card" data-category="games" aria-label="Project: Maze of Resolve">
         <div class="project-thumb">
-          <svg class="thumb-pattern" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <pattern id="g2" width="20" height="20" patternUnits="userSpaceOnUse">
-                <circle cx="10" cy="10" r="0.8" fill="#00cfff" opacity="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="400" height="225" fill="url(#g2)"/>
-            <polygon points="200,50 270,175 130,175" fill="none" stroke="#00cfff" stroke-width="0.8"/>
-            <polygon points="200,80 250,165 150,165" fill="none" stroke="#00ff88" stroke-width="0.5"/>
-          </svg>
-          <span class="thumb-label">Maze of Resolve</span>
+          <img src="images/Maze of Resolve.png" alt="Maze of Resolve Thumbnail" class="project-image">
           <span class="engine-badge">C++ / Unity 3D</span>
         </div>
         <div class="project-body">
@@ -1567,18 +1552,7 @@
       <!-- PROJECT 3 -->
       <article class="project-card" data-category="games" aria-label="Project: Slime Monsters">
         <div class="project-thumb">
-          <svg class="thumb-pattern" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <line x1="50"  y1="112" x2="200" y2="50"  stroke="#ff3355" stroke-width="0.6" opacity="0.6"/>
-            <line x1="50"  y1="112" x2="200" y2="175" stroke="#ff3355" stroke-width="0.6" opacity="0.6"/>
-            <line x1="350" y1="112" x2="200" y2="50"  stroke="#ff3355" stroke-width="0.6" opacity="0.6"/>
-            <line x1="350" y1="112" x2="200" y2="175" stroke="#ff3355" stroke-width="0.6" opacity="0.6"/>
-            <line x1="200" y1="50"  x2="200" y2="175" stroke="#00ff88" stroke-width="0.8"/>
-            <circle cx="50"  cy="112" r="8" fill="#ff3355" opacity="0.7"/>
-            <circle cx="350" cy="112" r="8" fill="#ff3355" opacity="0.7"/>
-            <circle cx="200" cy="50"  r="8" fill="#00ff88" opacity="0.7"/>
-            <circle cx="200" cy="175" r="8" fill="#00ff88" opacity="0.7"/>
-          </svg>
-          <span class="thumb-label">Slime Monsters</span>
+          <img src="images/Slime Monsters.png" alt="Slime Monsters Thumbnail" class="project-image">
           <span class="engine-badge">C++ / Unity 2D</span>
         </div>
         <div class="project-body">
@@ -1610,14 +1584,7 @@
       <!-- PROJECT 4 -->
       <article class="project-card" data-category="tools" aria-label="Project: DeathTiles">
         <div class="project-thumb">
-          <svg class="thumb-pattern" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="30"  y="30"  width="160" height="80"  fill="none" stroke="#00cfff" stroke-width="0.7" rx="2"/>
-            <rect x="210" y="30"  width="160" height="80"  fill="none" stroke="#00cfff" stroke-width="0.7" rx="2"/>
-            <rect x="30"  y="125" width="340" height="70"  fill="none" stroke="#00ff88" stroke-width="0.7" rx="2"/>
-            <line x1="110" y1="110" x2="110" y2="125" stroke="#00cfff" stroke-width="0.5" stroke-dasharray="3 2"/>
-            <line x1="290" y1="110" x2="290" y2="125" stroke="#00cfff" stroke-width="0.5" stroke-dasharray="3 2"/>
-          </svg>
-          <span class="thumb-label">DeathTiles</span>
+          <img src="images/DeathTiles.png" alt="DeathTiles Thumbnail" class="project-image">
           <span class="engine-badge">C++ / Tools</span>
         </div>
         <div class="project-body">
