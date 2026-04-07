@@ -2092,17 +2092,53 @@
         `> SUBJECT  : ${subject || '(none)'}`,
         `> PAYLOAD  : ${message.substring(0, 40)}${message.length > 40 ? '...' : ''}`,
         `> ENCRYPTING...`,
-        `> TRANSMITTING...`,
-        `> STATUS   : 200 OK — Message delivered successfully.`,
-        `> Awaiting response from mission control.`
+        `> TRANSMITTING...`
       ];
 
       typeTerminalLines(lines, '#00ff88', () => {
-        sendBtn.querySelector('span').textContent = 'Sent ✓';
-        /* Clear fields */
-        ['cf-name','cf-email','cf-subject','cf-message'].forEach(id => {
-          document.getElementById(id).value = '';
+
+        /* ACTUAL SEND */
+        fetch("https://formspree.io/f/mjgplzja", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            _subject: subject,
+            message: message
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+
+            typeTerminalLines([
+              `> STATUS   : 200 OK — Message delivered successfully.`,
+              `> Awaiting response from mission control.`
+            ], '#00ff88', () => {
+
+              sendBtn.querySelector('span').textContent = 'Sent ✓';
+
+              /* Clear fields */
+              ['cf-name','cf-email','cf-subject','cf-message'].forEach(id => {
+                document.getElementById(id).value = '';
+              });
+
+            });
+
+          } else {
+            typeTerminal('> ERROR: Failed to send message.', '#ff3355');
+            sendBtn.disabled = false;
+            sendBtn.querySelector('span').textContent = 'Send Message';
+          }
+        })
+        .catch(() => {
+          typeTerminal('> ERROR: Network issue.', '#ff3355');
+          sendBtn.disabled = false;
+          sendBtn.querySelector('span').textContent = 'Send Message';
         });
+
       });
     });
 
