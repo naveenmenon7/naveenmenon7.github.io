@@ -31,7 +31,7 @@
       --font-display: 'Orbitron', sans-serif;
       --font-mono:    'Share Tech Mono', monospace;
       --font-body:    'DM Sans', sans-serif;
-      --gutter:       clamp(1.5rem, 5vw, 4rem);
+      --gutter:       clamp(1.5rem, 4vw, 4rem);
       --nav-h:        64px;
       --transition:   0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -41,7 +41,9 @@
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth;
+      font-size: clamp(14px, 0.9vw, 18px);
+    }
 
     body {
       background: var(--black);
@@ -316,7 +318,7 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 900px;
+      max-width: clamp(900px, 60vw, 1400px);
     }
 
     .hero-eyebrow {
@@ -485,7 +487,7 @@
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1.4fr;
-      gap: 5rem;
+      gap: clamp(2rem, 6vw, 8rem);
       align-items: start;
       margin-top: 3rem;
     }
