@@ -1082,10 +1082,11 @@
         top: var(--nav-h);
         right: 0;
         width: 260px;
-        height: calc(100vh - var(--nav-h));
+        height: auto;
         background: var(--black);
         padding: 2rem var(--gutter);
         border-left: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
         align-items: flex-start;
         z-index: 999;
       }
