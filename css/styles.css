@@ -69,6 +69,16 @@
     }
     body:hover #cursor { opacity: 1; }
 
+    #liquid-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
     /* ============================================================
        SCANLINE OVERLAY — The "CRT Screen" Atmosphere
        ============================================================ */
