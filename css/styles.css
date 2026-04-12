@@ -1086,7 +1086,7 @@
         background: var(--black);
         padding: 2rem var(--gutter);
         border-left: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
+        bottom: auto;
         align-items: flex-start;
         z-index: 999;
       }
