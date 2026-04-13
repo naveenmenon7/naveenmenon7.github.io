@@ -153,6 +153,11 @@
       });
     });
 
+        /* FIX: Ensure ALL projects show on initial load */
+    window.addEventListener('load', () => {
+      document.querySelector('.filter-tab[data-filter="all"]').click();
+    });
+
     /*
      * ============================================================
      * CONTACT FORM — terminal-style feedback simulation
