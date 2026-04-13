@@ -327,76 +327,97 @@
       setTimeout(typePhrase, 2500);
     }, 1800);
 
-    /*
+/*
  * ============================================================
  * LIQUID CURSOR EFFECT — HOME ONLY
  * ============================================================
  */
 
-    const liquidCanvas = document.getElementById('liquid-canvas');
-    const liquidCtx = liquidCanvas.getContext('2d');
+const liquidCanvas = document.getElementById('liquid-canvas');
+const liquidCtx = liquidCanvas.getContext('2d');
 
-    let lastX = 0, lastY = 0;
+let lastX = 0, lastY = 0;
 
-    let liquidParticles = [];
+let liquidParticles = [];
 
-    function resizeLiquidCanvas() {
-    liquidCanvas.width = window.innerWidth;
-    liquidCanvas.height = window.innerHeight;
-    }
-    resizeLiquidCanvas();
-    window.addEventListener('resize', resizeLiquidCanvas);
+function resizeLiquidCanvas() {
+  liquidCanvas.width = window.innerWidth;
+  liquidCanvas.height = window.innerHeight;
+}
+resizeLiquidCanvas();
+window.addEventListener('resize', resizeLiquidCanvas);
 
-    let isHomeActive = true;
+let isHomeActive = true;
 
-    window.addEventListener('scroll', () => {
-    const home = document.querySelector('#home');
-    const rect = home.getBoundingClientRect();
+window.addEventListener('scroll', () => {
+  const home = document.querySelector('#home');
+  const rect = home.getBoundingClientRect();
 
-    const threshold = window.innerHeight * 0.9;
+  const threshold = window.innerHeight * 0.9;
 
-    if (rect.bottom < threshold) {
-        isHomeActive = false;
-        liquidParticles = []; // clear instantly
+  if (rect.bottom < threshold) {
+    isHomeActive = false;
+    liquidParticles = [];
+  } else {
+    isHomeActive = true;
+  }
+});
+
+document.addEventListener('mousemove', (e) => {
+  const home = document.querySelector('#home');
+  const rect = home.getBoundingClientRect();
+
+  if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+
+    const speed = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    const t = Math.min(speed / 25, 1); // Tuned Sensitivity
+
+    let r, g, b;
+
+    if (t < 0.25) {
+      // blue → green
+      const k = t / 0.25;
+      r = 0;
+      g = Math.floor(255 * k);
+      b = 255;
+    } else if (t < 0.85) {
+      // green → yellow (LONG)
+      const k = (t - 0.25) / 0.6;
+      r = Math.floor(255 * k);
+      g = 255;
+      b = Math.floor(255 * (1 - k));
     } else {
-        isHomeActive = true;
+      // yellow → red
+      const k = (t - 0.85) / 0.15;
+      r = 255;
+      g = Math.floor(255 * (1 - k));
+      b = 0;
     }
+
+    const intensity = Math.min(speed / 8, 6);
+
+    liquidParticles.push({
+      x: e.clientX,
+      y: e.clientY,
+      size: 10 + intensity * 6,
+      alpha: 1,
+      growth: 0.8 + intensity * 0.3,
+      lineWidth: 1 + intensity * 0.5,
+      color: [r, g, b]
     });
+  }
+});
 
-    document.addEventListener('mousemove', (e) => {
-    const home = document.querySelector('#home');
-    const rect = home.getBoundingClientRect();
+function animateLiquid() {
+  liquidCtx.clearRect(0, 0, liquidCanvas.width, liquidCanvas.height);
 
-    if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-
-        const speed = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-        lastX = e.clientX;
-        lastY = e.clientY;
-
-        const intensity = Math.min(speed / 8, 6);
-
-        liquidParticles.push({
-        x: e.clientX,
-        y: e.clientY,
-        size: 10 + intensity * 6,
-        alpha: 1,
-        growth: 0.8 + intensity * 0.3,
-        lineWidth: 1 + intensity * 0.5
-        });
-    }
-    });
-
-    function animateLiquid() {
-    liquidCtx.clearRect(0, 0, liquidCanvas.width, liquidCanvas.height);
-
-    for (let i = 0; i < liquidParticles.length; i++) {
+  for (let i = 0; i < liquidParticles.length; i++) {
     let p = liquidParticles[i];
 
-    // color shift between green and cyan
-    const mix = Math.sin(p.size * 0.05) * 0.5 + 0.5;
-    const r = 0;
-    const g = Math.floor(255 * (1 - mix));
-    const b = Math.floor(255 * mix);
+    const [r, g, b] = p.color;
 
     liquidCtx.beginPath();
     liquidCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -404,17 +425,16 @@
     liquidCtx.lineWidth = p.lineWidth;
     liquidCtx.stroke();
 
-    // ripple expansion
     p.size += p.growth;
     p.alpha -= 0.02;
 
     if (p.alpha <= 0) {
-        liquidParticles.splice(i, 1);
-        i--;
+      liquidParticles.splice(i, 1);
+      i--;
     }
-    }
+  }
 
-    requestAnimationFrame(animateLiquid);
-    }
+  requestAnimationFrame(animateLiquid);
+}
 
-    animateLiquid();
+animateLiquid();
