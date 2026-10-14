@@ -285,9 +285,9 @@
      */
     const phrases = [
       '// FRESHER',
+      '// SOFTWARE DEVELOPER',
       '// GAME DEVELOPER',
-      '// AR DEVELOPER',
-      '// GAME TESTER',
+      '// QA TESTER',
     ];
     const eyebrow = document.querySelector('.hero-eyebrow');
     let phraseIdx = 0;
